@@ -1,7 +1,7 @@
 #BGP PEERED MULTIPLE SPANNING TREE NETWORK
 
 **Platform:** EVEN-NG, IOSv images
-**Scope:** Dual-homed BGP edge design, OSPF/HSRP distribution, and a multi-region MST access layer with EtherChannel — built to demonstrate CCNP-level routing and switching skills in one topology.
+**Scope:** Dual-homed BGP edge design, OSPF/HSRP distribution, and a multi-region MST with EtherChannel — built to demonstrate CCNP-level routing and switching skills in one topology.
 
 > **Note on addressing:** All IP addressing in this lab uses public-range-style addresses without PAT/NAT anywhere in the path. In a real production deployment fronting the internet, NAT/PAT would normally sit at the edge. It was intentionally left out here so that routing (BGP/OSPF/HSRP) and switching (MST/EtherChannel) behavior stays fully visible end-to-end without a translation boundary obscuring next-hops, path selection, or reachability testing.
 
