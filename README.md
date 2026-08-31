@@ -1,4 +1,4 @@
-# Enterprise Edge + Campus Access Lab — README
+#BGP PEERED MULTIPLE SPANNING TREE NETWORK
 
 **Platform:** EVEN-NG, IOSv images
 **Scope:** Dual-homed BGP edge design, OSPF/HSRP distribution, and a multi-region MST access layer with EtherChannel — built to demonstrate CCNP-level routing and switching skills in one topology.
