@@ -1,0 +1,245 @@
+*Aug 31 19:44:21.938: %SYS-5-CONFIG_I: Configured from console by ethangrishin on console
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************
+
+User Access Verification
+
+Username: ethangrishin
+Password:
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************
+demarcROright#show ip bgp summary
+BGP router identifier 201.20.1.1, local AS number 65001
+BGP table version is 2, main routing table version 2
+1 network entries using 144 bytes of memory
+3 path entries using 252 bytes of memory
+3/1 BGP path/bestpath attribute entries using 480 bytes of memory
+1 BGP AS-PATH entries using 24 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 900 total bytes of memory
+BGP activity 1/0 prefixes, 3/0 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+201.20.1.2      4        65001     244     243        2    0    0 03:38:33        1
+201.20.1.3      4        65002     242     241        2    0    0 03:34:33        1
+demarcROright#wr mem
+Building configuration...
+
+  [OK]
+demarcROright#
+*Aug 31 20:56:58.394: %GRUB-5-CONFIG_WRITING: GRUB configuration is being updated on disk. Please wait...
+*Aug 31 20:56:59.124: %GRUB-5-CONFIG_WRITTEN: GRUB configuration was written to disk successfully.
+demarcROright#do show running-config
+                 ^
+% Invalid input detected at '^' marker.
+
+demarcROright#show running-config
+Building configuration...
+
+
+Current configuration : 4307 bytes
+!
+! Last configuration change at 19:44:21 UTC Mon Aug 31 2026 by ethangrishin
+!
+version 15.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname demarcROright
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain name office.com
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username ethangrishin privilege 15 secret 9 $9$aK0.O.6/7Mj5tf$gv1yxaObzUEXZYqQmSUKdnaOBfwpDsbmhD1LnH6wd.6
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.1.1.254 255.255.255.255
+ ip ospf 100 area 0
+!
+interface GigabitEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 172.168.2.1 255.255.255.0
+ standby version 2
+ standby 10 ip 172.168.2.3
+ standby 10 priority 255
+ standby 10 preempt
+ ip ospf 100 area 0
+!
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 172.168.3.1 255.255.255.0
+ standby version 2
+ standby 20 ip 172.168.3.3
+ standby 20 priority 254
+ standby 20 preempt
+ ip ospf 100 area 0
+!
+interface GigabitEthernet0/0.99
+ encapsulation dot1Q 99 native
+ ip address 172.168.1.1 255.255.255.0
+ ip ospf 100 area 0
+!
+interface GigabitEthernet0/1
+ ip address 201.20.1.1 255.255.255.248
+ duplex auto
+ speed auto
+ media-type rj45
+ no cdp enable
+ no lldp transmit
+ no lldp receive
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+router ospf 100
+ router-id 10.1.1.254
+ auto-cost reference-bandwidth 100000
+ passive-interface GigabitEthernet0/1
+!
+router ospf 1
+!
+router bgp 65001
+ bgp router-id 201.20.1.1
+ bgp log-neighbor-changes
+ network 201.20.1.0 mask 255.255.255.248
+ neighbor 201.20.1.2 remote-as 65001
+ neighbor 201.20.1.2 description demarcROleft
+ neighbor 201.20.1.2 next-hop-self
+ neighbor 201.20.1.3 remote-as 65002
+ neighbor 201.20.1.3 ebgp-multihop 2
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip ssh version 2
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 924
+ login local
+ transport input ssh
+!
+no scheduler allocate
+!
+end
+
+demarcROright#

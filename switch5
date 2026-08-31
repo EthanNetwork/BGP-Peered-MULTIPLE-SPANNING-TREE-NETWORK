@@ -1,0 +1,237 @@
+
+
+
+
+
+
+*Aug 31 20:01:47.343: %SYS-5-CONFIG_I: Configured from console by console
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+
+
+User Access Verification
+
+Username: ethangrishin
+Password:
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+
+switch5#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+switch5(config)#do show spanning-tree mst
+
+##### MST0    vlans mapped:   1-9,11-19,21-4094
+Bridge        address 5000.0005.0000  priority      0     (0 sysid 0)
+Root          this switch for the CIST
+Operational   hello time 2 , forward delay 15, max age 20, txholdcount 6
+Configured    hello time 2 , forward delay 15, max age 20, max hops    20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Gi0/0            Desg FWD 20000     128.1    P2p
+Gi0/1            Desg FWD 20000     128.2    P2p
+Gi0/2            Desg FWD 20000     128.3    P2p
+Gi0/3            Desg FWD 20000     128.4    P2p
+Gi1/0            Desg FWD 20000     128.5    P2p
+Gi1/1            Desg FWD 20000     128.6    P2p
+Gi1/2            Desg FWD 20000     128.7    P2p
+Gi1/3            Desg FWD 20000     128.8    P2p
+
+##### MST10   vlans mapped:   10
+Bridge        address 5000.0005.0000  priority      10    (0 sysid 10)
+Root          this switch for MST10
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Gi0/0            Desg FWD 20000     128.1    P2p
+Gi0/1            Desg FWD 20000     128.2    P2p
+Gi0/2            Desg FWD 20000     128.3    P2p
+Gi0/3            Desg FWD 20000     128.4    P2p
+
+##### MST20   vlans mapped:   20
+Bridge        address 5000.0005.0000  priority      20    (0 sysid 20)
+Root          this switch for MST20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Gi0/0            Desg FWD 20000     128.1    P2p
+Gi0/1            Desg FWD 20000     128.2    P2p
+Gi0/2            Desg FWD 20000     128.3    P2p
+Gi0/3            Desg FWD 20000     128.4    P2p
+
+switch5(config)#do show running-config
+Building configuration...
+
+Current configuration : 3711 bytes
+!
+! Last configuration change at 20:01:47 UTC Mon Aug 31 2026
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname switch5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+username ethangrishin privilege 15 secret 5 $1$yZ.k$xP0J1ktFyXm0w4ZIwUDjG1
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name office.com
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode mst
+spanning-tree extend system-id
+!
+spanning-tree mst configuration
+ name region_1
+ revision 2
+ instance 10 vlan 10
+ instance 20 vlan 20
+!
+spanning-tree mst 0,10,20 priority 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ switchport trunk allowed vlan 10,20,99
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ negotiation auto
+!
+interface GigabitEthernet0/1
+ switchport trunk allowed vlan 10,20,99
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ negotiation auto
+!
+interface GigabitEthernet0/2
+ switchport trunk allowed vlan 10,20,99
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ switchport trunk allowed vlan 10,20,99
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ negotiation auto
+!
+interface GigabitEthernet1/1
+ negotiation auto
+!
+interface GigabitEthernet1/2
+ negotiation auto
+!
+interface GigabitEthernet1/3
+ negotiation auto
+!
+ip forward-protocol nd
+!
+ip http server
+ip http secure-server
+!
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner exec ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner incoming ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner login ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 1500
+ login local
+ transport input ssh
+!
+!
+end
+
+switch5(config)#do wr mem
+Building configuration...
+Compressed configuration from 3711 bytes to 2060 bytes[OK]
+switch5(config)#
+*Aug 31 20:58:59.027: %GRUB-5-CONFIG_WRITING: GRUB configuration is being updated on disk. Please wait...
+*Aug 31 20:58:59.726: %GRUB-5-CONFIG_WRITTEN: GRUB configuration was written to disk successfully.
+switch5(config)#
