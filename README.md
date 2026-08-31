@@ -56,7 +56,7 @@
 | demarcROleft ↔ demarcROright ↔ isprouter (BVI) | 201.20.1.0/29 |
 | Loopbacks (OSPF router-IDs)   | 10.1.1.1 (isprouter), 10.1.1.253 (left), 10.1.1.254 (right) |
 
-VLANs 10/20 are end-host data VLANs; VLAN 99 doubles as the native VLAN on every trunk in the access/distribution layer **and** as the routed management/transit VLAN between the demarc routers and Switch5.
+VLANs 10/20 are end-host data VLANs; VLAN 99 doubles as the native VLAN on every trunk and on the demarc routers
 
 ---
 
